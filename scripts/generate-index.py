@@ -31,11 +31,12 @@ lines = [
     "</head>",
     "<body>",
     "  <h1>Mayo Archive</h1>",
+    "  <h2>Ongezellig sphere and SoyBooru HTMLS archive</h1>",
 ]
 
 for directory in sorted(files_by_directory, key=lambda p: str(p).lower()):
     title = "Root" if directory == Path(".") else str(directory)
-    lines.append(f"  <h2>{escape(title)}</h2>")
+    lines.append(f"  <h3>{escape(title)}</h3>")
     lines.append("  <ul>")
 
     for path in sorted(files_by_directory[directory], key=lambda p: p.name.lower()):
