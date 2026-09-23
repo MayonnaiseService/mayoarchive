@@ -1,0 +1,35 @@
+name: Update HTML index
+
+on:
+  push:
+    branches:
+      - test-autoindex
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  update-index:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Generate index.html
+        run: python scripts/generate-index.py
+
+      - name: Commit updated index
+        run: |
+          if git diff --quiet -- index.html; then
+            echo "index.html is already up to date"
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add index.html
+          git commit -m "Automatically update HTML index"
+          git push
