@@ -3,7 +3,7 @@ name: Update HTML index
 on:
   push:
     branches:
-      - test-autoindex
+      - main
   workflow_dispatch:
 
 permissions:
